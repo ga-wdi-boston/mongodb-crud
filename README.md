@@ -99,17 +99,17 @@ local     0.078GB
 
 Let's add these people to the contacts database:
 
-Ann Placement-Manager, Staffing Inc.
-office phone 617-555-1991 ext. 315
-cell phone 718-555-9151
+Ann Placement-Manager, Staffing Inc.,
+office phone 617-555-1991 ext. 315,
+cell phone 718-555-9151,
 email ann.placementmanager@staffinginc.com
 
-Martine H. R. Manager, TechCorp LLC
-title Director of Human Resources
-office phone 617-555-7123
-cell phone 617-555-9918
-home phone 617-555-1122
-work email martine.h.r.manager@techcorpllc.com
+Martine H. R. Manager, TechCorp LLC,
+title Director of Human Resources,
+office phone 617-555-7123,
+cell phone 617-555-9918,
+home phone 617-555-1122,
+work email martine.h.r.manager@techcorpllc.com,
 home email martinemanager@gmail.com
 
 Consider the JSON representation first: think before you type!

@@ -371,28 +371,29 @@ We're starting a veterinary practice to take care of all the cats we know!
 
 Start with `use cats` in your MongoDB shell, then add these cats:
 
-Tiger, male, age 7, black short hair, adopted from NYSPCA
-Reggie, male, age 7, half-Siamese striped tabby, adopted from NYSPCA
-Ting, seal point Siamese, age 8, male, Siamese rescue
-Boris, male, Russian blue, age 5, brother to Natasha, adopted from NYSPCA
-Natasha, female, Russian blue, age 5, sister to Boris, adopted from NYSPCA
-Bond, female, black and white tuxedo cat, age 4, found in Harvard Yard
-Sacco, male, half-Siamese, age 3, adopted from MSPCA, brother to Vanzetti
-Vanzetti, male, half-Siamese, age 3, adopted from MSPCA, brother to Sacco
-M, female, grey tuxedo cat, age 3, adopted from MSPCA
-Gilbert, male, 3/4-Siamese, age 3, adopted from MSPCA
-Sullivan, male 3/4-Siamese, age 3, adopted from MSPCA
-Domino, age 1, black and white tuxedo cat, rescued from Alabama
-Ann, female, age 8, grey leopard tabby, found under a barn, sister to Julian
-Julian, female, age 8, grey leopard tabby, found under a barn, sister to Ann
+* Tiger, male, age 7, black short hair, adopted from NYSPCA
+* Reggie, male, age 7, half-Siamese striped tabby, adopted from NYSPCA
+* Ting, seal point Siamese, age 8, male, Siamese rescue
+* Boris, male, Russian blue, age 5, brother to Natasha, adopted from NYSPCA
+* Natasha, female, Russian blue, age 5, sister to Boris, adopted from NYSPCA
+* Bond, female, black and white tuxedo cat, age 4, found in Harvard Yard
+* Sacco, male, half-Siamese, age 3, adopted from MSPCA, brother to Vanzetti
+* Vanzetti, male, half-Siamese, age 3, adopted from MSPCA, brother to Sacco
+* M, female, grey tuxedo cat, age 3, adopted from MSPCA
+* Gilbert, male, 3/4-Siamese, age 3, adopted from MSPCA
+* Sullivan, male 3/4-Siamese, age 3, adopted from MSPCA
+* Domino, age 1, black and white tuxedo cat, rescued from Alabama
+* Ann, female, age 8, grey leopard tabby, found under a barn, sister to Julian
+* Julian, female, age 8, grey leopard tabby, found under a barn, sister to Ann
 
 Some cats have favorite pastimes:
-Tiger likes sitting in the sun.
-Reggie likes complaining at the top of his voice.
-Boris likes echolocating in ventilation systems.
-Sacco and Vanzetti like making mischief.
-Bond likes ordering people around.
-Domino likes harassing other cats.
+
+* Tiger likes sitting in the sun.
+* Reggie likes complaining at the top of his voice.
+* Boris likes echolocating in ventilation systems.
+* Sacco and Vanzetti like making mischief.
+* Bond likes ordering people around.
+* Domino likes harassing other cats.
 
 (These are all real cats.  At this point, we can add more cats suggested by people in class: we'll make a list on the whiteboard.)
 

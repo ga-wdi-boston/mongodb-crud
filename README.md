@@ -1,4 +1,4 @@
-# Installing MongoDB
+# An Introduction to MongoDB
 
 Relational databases like PostgreSQL are good at modeling data that fits nicely into tables.  What do you do if your data doesn't fit that mold?
 
@@ -100,17 +100,17 @@ local     0.078GB
 Let's add these people to the contacts database:
 
 Ann Placement-Manager, Staffing Inc.
-    office phone 617-555-1991 ext. 315,
-    cell phone 718-555-9151,
-    email ann.placementmanager@staffinginc.com
+office phone 617-555-1991 ext. 315
+cell phone 718-555-9151
+email ann.placementmanager@staffinginc.com
 
 Martine H. R. Manager, TechCorp LLC
-    title Director of Human Resources
-    office phone 617-555-7123,
-    cell phone 617-555-9918,
-    home phone 617-555-1122,
-    work email martine.h.r.manager@techcorpllc.com
-    home email martinemanager@gmail.com
+title Director of Human Resources
+office phone 617-555-7123
+cell phone 617-555-9918
+home phone 617-555-1122
+work email martine.h.r.manager@techcorpllc.com
+home email martinemanager@gmail.com
 
 Consider the JSON representation first: think before you type!
 
@@ -248,6 +248,20 @@ We can pass arguments to `find`, and MongoDB will give us all matching records:
 ```
 
 There is an incredibly useful table that translates from SQL to MongoDB syntax at [http://docs.mongodb.org/manual/reference/sql-comparison/](http://docs.mongodb.org/manual/reference/sql-comparison/).
+
+## Try it yourself
+
+I recommend working within your groups so that you can assist each other.
+
+* Make up five fictional people and add them to your contacts database.  
+
+* For now, keep things in the formats we have used with Joe Recruiter, Ann Placement-Manager, and Martine H. R. Director.
+
+* Make sure at least one of your people works for Staffing Inc. or TechCorp LLC.
+
+* Search for your people and make sure you find them in the database!
+
+
 
 
 

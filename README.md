@@ -247,6 +247,17 @@ We can pass arguments to `find`, and MongoDB will give us all matching records:
 > 
 ```
 
+We got a call from 617-555-1122 called us!  Who could it be?
+
+```
+db.contacts.find({ $or: [
+    { phone: '617-555-1122'},
+    { 'phone.office': '617-555-1122' },
+    { 'phone.cell': '617-555-1122' },
+    { 'phone.home': '617-555-1122' }   
+]});
+```
+
 There is an incredibly useful table that translates from SQL to MongoDB syntax at [http://docs.mongodb.org/manual/reference/sql-comparison/](http://docs.mongodb.org/manual/reference/sql-comparison/).
 
 ## Try it yourself
@@ -260,6 +271,133 @@ I recommend working within your groups so that you can assist each other.
 * Make sure at least one of your people works for Staffing Inc. or TechCorp LLC.
 
 * Search for your people and make sure you find them in the database!
+
+## Update
+
+Suppose that Joe Recruiter has spun off his own firm.  We start with finding him in the database:
+
+```
+> db.contacts.find({name: "Joe Recruiter"}).pretty();
+{
+    "_id" : ObjectId("5579a06aaa2cdce4a1f15f21"),
+    "name" : "Joe Recruiter",
+    "company" : "Staffing Inc.",
+    "phone" : {
+        "office" : "617-555-1991 ext. 311",
+        "cell" : "508-555-9215"
+    },
+    "email" : "joe.recruiter@staffinginc.com"
+}
+>
+```
+
+With the same clause, we can update:
+
+```
+db.contacts.update({ 
+    name: "Joe Recruiter" 
+},{ $set: {
+    company: 'Recruiter Recruitment LLC', 
+    'phone.office': '508-555-1111' 
+}});
+
+db.contacts.update({
+    name: "Joe Recruiter"
+}, { 
+    $set: { email: 'joe@recruiterrecruitment.com' }
+});
+```
+
+(Yes, we could have done both of those in one statement.)
+
+Notice the $set key: the value is a dictionary of key-value pairs to update.
+
+## You try it
+
+* One of the contacts you added got a job at Staffing Inc.  Change his or her company, office phone number, and email.
+
+* One of your contacts has a new job title.  Update it.
+
+## Keeping a record of communications
+
+We're using this database to support a job hunt, right?
+
+```
+db.contacts.update({ 
+    name: "Joe Recruiter" 
+}, { 
+    $push: { communications: { 
+        date: '20150611', 
+        summary: "Discussed General Assembly teaching job" }
+    }
+});
+
+db.contacts.update({ 
+    name: "Joe Recruiter" 
+}, { 
+    $push: { communications: { 
+        date: '20150612', 
+        summary: "Discussed General Assembly teaching job further" }
+    }
+});
+```
+
+## You try it
+
+Create a list of something attached to one of your contacts.  Maybe he collects clssica cars -- or ex-partners?
+
+## Deleting a field
+
+Joe Recruiter has been indicted for nefarious something-or-other, so we want to remove our contact record:
+
+```
+db.contacts.update({
+    name: "Joe Recruiter"
+}, { $unset: { communications: 1 }});
+})
+```
+
+## Deleting a document
+ 
+Joe Recruiter went to jail.  No point in keeping him as a contact!
+
+```
+db.contacts.remove({ name: "Joe Recruiter"});
+```
+
+# Lab: Veterinary Cat-astrophe
+
+We're starting a veterinary practice to take care of all the cats we know!
+
+Start with `use cats` in your MongoDB shell, then add these cats:
+
+Tiger, male, age 7, black short hair, adopted from NYSPCA
+Reggie, male, age 7, half-Siamese striped tabby, adopted from NYSPCA
+Ting, seal point Siamese, age 8, male, Siamese rescue
+Boris, male, Russian blue, age 5, brother to Natasha, adopted from NYSPCA
+Natasha, female, Russian blue, age 5, sister to Boris, adopted from NYSPCA
+Bond, female, black and white tuxedo cat, age 4, found in Harvard Yard
+Sacco, male, half-Siamese, age 3, adopted from MSPCA, brother to Vanzetti
+Vanzetti, male, half-Siamese, age 3, adopted from MSPCA, brother to Sacco
+M, female, grey tuxedo cat, age 3, adopted from MSPCA
+Gilbert, male, 3/4-Siamese, age 3, adopted from MSPCA
+Sullivan, male 3/4-Siamese, age 3, adopted from MSPCA
+Domino, age 1, black and white tuxedo cat, rescued from Alabama
+Ann, female, age 8, grey leopard tabby, found under a barn, sister to Julian
+Julian, female, age 8, grey leopard tabby, found under a barn, sister to Ann
+
+Some cats have favorite pastimes:
+Tiger likes sitting in the sun.
+Reggie likes complaining at the top of his voice.
+Boris likes echolocating in ventilation systems.
+Sacco and Vanzetti like making mischief.
+Bond likes ordering people around.
+Domino likes harassing other cats.
+
+(These are all real cats.  At this point, we can add more cats suggested by people in class: we'll make a list on the whiteboard.)
+
+Now, we're a veterinary practice.   Make up at least fifteen vet visits and use the update + $push method to record them.  Do not distribute them evenly: some cats should have no vet visits on record, others will have several.
+
 
 
 

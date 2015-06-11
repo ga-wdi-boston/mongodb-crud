@@ -7,10 +7,8 @@ Relational databases like PostgreSQL are good at modeling data that fits nicely 
 By the end of the lesson, students will be able to do the following:
 
 * Describe and explain the tradeoffs involved in using a NoSQL database like MongoDB instead of a relational database like PostgreSQL 
-* Create a MongoDB database
-* Create a MongoDB collection using the Mongo shell
+* Select a MongoDB database and collection to work with using the Mongo shell
 * Create, Read, Update, and Destroy documents in a MongoDB collection using the Mongo shell
-* Create, Read, Update, and Destroy documents in a MongoDB collection using Javascript and Node
 
 ## Before we begin: installation
 
@@ -398,6 +396,10 @@ Some cats have favorite pastimes:
 (These are all real cats.  At this point, we can add more cats suggested by people in class: we'll make a list on the whiteboard.)
 
 Now, we're a veterinary practice.   Make up at least fifteen vet visits and use the update + $push method to record them.  Do not distribute them evenly: some cats should have no vet visits on record, others will have several.
+
+## Review Objectives
+
+We haven't discussed the first objective!  Based on what you've seen, what *are* the tradeoffs involved in using a NoSQL database like MongoDB instead of a relational database like PostgreSQL?
 
 
 

@@ -410,4 +410,4 @@ If we want to clean up, `db.dropDatabase();` drops the current database.
 
 ## Review Objectives
 
-We haven't discussed the first objective.  Based on what you've seen, what *are* the trade-offs involved in using a NoSQL database like MongoDB instead of a relational database like PostgreSQL?
+Let's discuss the first objective.  Based on what you've seen, what are some of the trade-offs between using a NoSQL database like MongoDB and using a relational database?

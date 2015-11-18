@@ -2,21 +2,46 @@
 
 # An Introduction to MongoDB
 
-Relational databases are good at modeling data that fits into tables.  What do you use if your data isn't that structured?
+## Instructions
+
+Fork and clone this repository.
+
+Please use `git clone --recursive` to ensure you retrieve the `sample-data` submodule.
 
 ## Objectives
 
 By the end of the lesson, students should be able to:
 
-* Describe tradeoffs between using a NoSQL database versus a relational database
 * Use the MongoDB shell to interact with MongoDB databases and collections
-* Create, Read, Update, and Delete documents in MongoDB collections using the Mongo shell
+* Create, Read, Update, and Delete documents in MongoDB collections using the MongoDB shell.
+
+## Prerequisites
+
+Basic JavaScript.
+
+Required readings:
+
+- [Completely unbiased explanation of noSQL](https://www.mongodb.com/nosql-explained)
+- [Mongo DB Is Web Scale](https://www.youtube.com/watch?v=b2F-DItXtZs)
+- [Getting Started with MongoDB (MongoDB Shell Edition)](https://docs.mongodb.org/getting-started/shell/)
 
 ## Installation
 
-We'll walk through the instructions in `INSTALL.md`.
+We'll run `brew install mongodb` then execute the first two commands suggested.
 
-## Terminology
+### On Ubuntu:
+
+Run `sudo apt-get install mongodb`
+
+## Introduction
+
+Relational databases are good at modeling data that fits into tables.  What do you use if your data isn't that structured?
+
+Perhaps a [noSQL](https://en.wikipedia.org/wiki/NoSQL) data-store. An important consideration is [ACID](http://en.wikipedia.org/wiki/ACID) versus [BASE](https://en.wikipedia.org/wiki/Eventual_consistency) and the [CAP theorem](https://en.wikipedia.org/wiki/CAP_theorem).
+
+MongoDB is a schema-less document-store that organizes documents in collections.  What does this mean?
+
+### Terminology
 
 |**Relational Database Term**|**MongoDB Term**|
 |:-------|:------|
@@ -25,389 +50,186 @@ We'll walk through the instructions in `INSTALL.md`.
 | row | document |
 | column | field |
 
-## Creating a MongoDB database and a collection
+## Create a database
+
+### Code along
+
+We'll use `mongo-crud` as the database to hold our tables and [mongo](https://docs.mongodb.org/manual/reference/program/mongo/) to interact with it.  `mongo` is MongoDB's command line client which lets us execute commands interactively and from scripts.
 
 First we start the mongo shell:
 
+```bash
+$ mongo mongo-crud
+MongoDB shell version: 3.0.7
+connecting to: mongo-crud
+>
 ```
-$ mongo
-MongoDB shell version: 3.0.3
+
+The command to list databases is `show databases` (or `show dbs`):
+
+```
+> show databases
+local  0.078GB
+>
+```
+
+Unlike PostgreSQL, MongoDB lets us select a database that hasn't been created.  When we add a collection, the database will be created.
+
+If we didn't specify the database on the command line we can connect to a database with `use <database name>`:
+
+```
+MongoDB shell version: 3.0.7
 connecting to: test
->
-```
-
-The command to list databases is `show databases`
-
-```
+> use mongo-crud
+switched to db mongo-crud
 > show databases
 local  0.078GB
 >
 ```
 
-The command to connect to a database is `use <database name>`:
+## Create a collection
+
+### Code along
+
+Our first collection will be called `people`. It has no entries.
 
 ```
-> use crud
-switched to db crud
-> show databases
-local  0.078GB
->
-```
-
-MongoDB lets us select a database that hasn't been created.  When we add a collection, the database will be created.
-
-Our first collection will be called `contacts`. It has no entries.
-
-```
-> db.contacts.count();
+> show collections
+> db.people.count();
 0
 ```
 
 This is a common pattern in MongoDB: you can refer to things that don't yet exist, and it will cooperate.  MongoDB won't create them until you give it something to remember.
 
-## Creating data
+## Adding a document to a collection.
 
-We're going to start keeping a contacts collection.
+- [Inserting data](https://docs.mongodb.org/getting-started/shell/insert/) - Overview of adding documents to a collection.
+- [db.<collection>.insert()](https://docs.mongodb.org/manual/reference/method/db.collection.insert/) - detailed documentation of MongoDB's `insert` collection method.
+- [Importing data](https://docs.mongodb.org/getting-started/shell/import-data/) - overview of MongoDB's `mongoimport` command line utility.
+- [mongoimport](https://docs.mongodb.org/manual/reference/program/mongoimport/) - detailed documentation of MongoDB's `mongoimport` command line utility.
 
-Our first contact is Joe Recruiter, with Staffing Inc.  We can create his record this way:
-
-### Demonstration
-
-```js
-db.contacts.insert({
-    name: 'Joe Recruiter',
-    company: 'Staffing Inc.',
-    phone: {
-        office: '617-555-1991 ext. 311',
-        cell: '508-555-9215'
-    },
-    email: 'joe.recruiter@staffinginc.com'
-});
-```
-
-MongoDB uses JSON natively, which makes it convenient for JavaScript web applications.  Conveniently, MongoDB let's us specify the JSON as a JavaScript object.
-
-Now that we've inserted data into it, the `crud` database exists:
-
-```
->  show databases;
-contacts  0.078GB
-local     0.078GB
->
-```
-
-### Code along
-
-Let's add these people to the contacts database:
-
-Ann Placement-Manager, Staffing Inc.,
-office phone 617-555-1991 ext. 315,
-cell phone 718-555-9151,
-email ann.placementmanager@staffinginc.com
-
-Martine H. R. Manager, TechCorp LLC,
-title Director of Human Resources,
-office phone 617-555-7123,
-cell phone 617-555-9918,
-home phone 617-555-1122,
-work email martine.h.r.manager@techcorpllc.com,
-home email martinemanager@gmail.com
-
-We'll create a script to run using the MongoDB shell.  We'll use `var db = new Mongo().getDB('crud');` at the top of the script to ensure we connect to the correct database.
-
-<!--
-
-db.contacts.insert({
-    name: 'Ann Placement-Manager',
-    company: 'Staffing Inc.',
-    phone: {
-        office: '617-555-1991 ext. 315',
-        cell: '718-555-9151'
-    },
-    email: 'ann.placementmanager@staffinginc.com'
-});
-
-db.contacts.insert({
-    name: 'Martine H. R. Manager',
-    title: 'Director of Human Resources',
-    company: 'TechCorp LLC',
-    phone: {
-        office: '617-555-7123',
-        cell: '617-555-9918',
-        home: '617-555-1122'
-    },
-    email: {
-        work: 'martine.h.r.manager@techcorpllc.com',
-        home: 'martinemanager@gmail.com'
-    }
-});
-
--->
-
-## Retrieving and Reading Data
+MongoDB's `mongoimport` command will let us load bulk data from a `JSON` or `CSV` file.
 
 ### Demonstration
 
-Let's start by looking at the entire database so far.
+First we'll load data in bulk from `sample-data/csv/people.csv`.  We'll save the command in `scripts/import/people.sh`.
 
-```
-> db.contacts.find();
-{ "_id" : ObjectId("5579a06aaa2cdce4a1f15f21"), "name" : "Joe Recruiter", "company" : "Staffing Inc.", "phone" : { "office" : "617-555-1991 ext. 311", "cell" : "508-555-9215" }, "email" : "joe.recruiter@staffinginc.com" }
-{ "_id" : ObjectId("5579a202aa2cdce4a1f15f22"), "name" : "Ann Placement-Manager", "company" : "Staffing Inc.", "phone" : { "office" : "617-555-1991 ext. 315", "cell" : "718-555-9151" }, "email" : "ann.placementmanager@staffinginc.com" }
-{ "_id" : ObjectId("5579a20aaa2cdce4a1f15f23"), "name" : "Martine H. R. Manager", "title" : "Director of Human Resources", "company" : "TechCorp LLC", "phone" : { "office" : "617-555-7123", "cell" : "617-555-9918", "home" : "617-555-1122" }, "email" : { "work" : "martine.h.r.manager@techcorpllc.com", "home" : "martinemanager@gmail.com" } }
->
+```bash
+mongoimport --db=mongo-crud --collection=people --type=csv --headerline --file=sample-data/csv/people.csv
 ```
 
-That's kind of tough to read, so we can filter it through `.pretty()`
+If we want to clear the collection before the import we pass the `--drop` flag.
+
+Now that we've inserted data into it, the `mongo-crud` database and the `people` collection both exist.
+
+```bash
+$ mongo mongo-crud
+MongoDB shell version: 3.0.7
+connecting to: mongo-crud
+> show dbs
+local       0.078GB
+mongo-crud  0.078GB
+> show collections
+people
+system.indexes
+> db.people.count();
+2438
+```
+
+Next we'll use the `insert` collection method to add a few more people.  We'll save our invocations in `insert/people.js`.  We'll execute that script using the `mongo` `load` method.  Let's give these people a middle_initial or a nick_name. Note that the attributes we choose for these people need not match those from the data we loaded in bulk.
 
 ```
-> db.contacts.find().pretty();
-{
-    "_id" : ObjectId("5579a06aaa2cdce4a1f15f21"),
-    "name" : "Joe Recruiter",
-    "company" : "Staffing Inc.",
-    "phone" : {
-        "office" : "617-555-1991 ext. 311",
-        "cell" : "508-555-9215"
-    },
-    "email" : "joe.recruiter@staffinginc.com"
-}
-{
-    "_id" : ObjectId("5579a202aa2cdce4a1f15f22"),
-    "name" : "Ann Placement-Manager",
-    "company" : "Staffing Inc.",
-    "phone" : {
-        "office" : "617-555-1991 ext. 315",
-        "cell" : "718-555-9151"
-    },
-    "email" : "ann.placementmanager@staffinginc.com"
-}
-{
-    "_id" : ObjectId("5579a20aaa2cdce4a1f15f23"),
-    "name" : "Martine H. R. Manager",
-    "title" : "Director of Human Resources",
-    "company" : "TechCorp LLC",
-    "phone" : {
-        "office" : "617-555-7123",
-        "cell" : "617-555-9918",
-        "home" : "617-555-1122"
-    },
-    "email" : {
-        "work" : "martine.h.r.manager@techcorpllc.com",
-        "home" : "martinemanager@gmail.com"
-    }
-}
+> load('scripts/insert/people.js');
 ```
+
+MongoDB uses JSON natively (technically [BSON](https://docs.mongodb.org/manual/reference/glossary/#term-bson)), which makes it well suited for JavaScript applications.  Conveniently, MongoDB lets us specify the JSON as a JavaScript object.
+
+#### Code along
+
+Together we'll add a few cities then we'll bulk load `sample-data/csv/cities.csv`.
+
+#### Practice
+
+Add a pet to the `pets` collection using `insert` then bulk load `sample-data/csv/pets.csv`.
+
+Next add a person to the `people` collection using `insert` then bulk load `sample-data/csv/people.csv`.
+
+---
+
+
+## Retrieving documents from a collection
+
+- [Querying](https://docs.mongodb.org/getting-started/shell/query/) - Overview of retrieving data from MongoDB.
+- [Queries](https://docs.mongodb.org/manual/reference/mongo-shell/#queries) - More detailed overview on retrieving data.
+- [find](https://docs.mongodb.org/manual/reference/method/db.collection.find/) - Detailed documentation on the `find` collection method.
+- [findOne](https://docs.mongodb.org/manual/reference/method/db.collection.findOne/) - Detailed documentation on the `findOne` collection method.
+- [Data aggregation](https://docs.mongodb.org/getting-started/shell/aggregation/) - Overview of summarizing documents.
+- [aggregate](https://docs.mongodb.org/manual/reference/method/db.collection.aggregate/) - Detailed documentation on the `aggregate` collection method.
+
+### Demonstration
+
+Let's see some what we can learn about the people in the database.
+
+**Note:**   In a MongoDB shell script we'll use `.forEach(printjson)` to display results.  When using the REPL the `.pretty()` method can be quite helpful.
 
 What do we see?
 
 * MongoDB gave each of our documents a unique ID field, called _id.
 
-* MongoDB doesn't care that Joe and Ann only have one email, while Martine has two emails.  It also doesn't care that Martine has a job title, while Joe and Ann do not.
-
-**Note:**   In a MongoDB shell script use `.forEach(printjson)` to display the results of your query.
-
-### Searching for particular things
-
-We can pass arguments to `find`, and MongoDB will give us all matching records:
-
-```
-> db.contacts.find({ _id: ObjectId("5579a20aaa2cdce4a1f15f23") }).pretty();
-{
-    "_id" : ObjectId("5579a20aaa2cdce4a1f15f23"),
-    "name" : "Martine H. R. Manager",
-    "title" : "Director of Human Resources",
-    "company" : "TechCorp LLC",
-    "phone" : {
-        "office" : "617-555-7123",
-        "cell" : "617-555-9918",
-        "home" : "617-555-1122"
-    },
-    "email" : {
-        "work" : "martine.h.r.manager@techcorpllc.com",
-        "home" : "martinemanager@gmail.com"
-    }
-}
-> db.contacts.find({ company: "Staffing Inc." }).pretty();
-{
-    "_id" : ObjectId("5579a06aaa2cdce4a1f15f21"),
-    "name" : "Joe Recruiter",
-    "company" : "Staffing Inc.",
-    "phone" : {
-        "office" : "617-555-1991 ext. 311",
-        "cell" : "508-555-9215"
-    },
-    "email" : "joe.recruiter@staffinginc.com"
-}
-{
-    "_id" : ObjectId("5579a202aa2cdce4a1f15f22"),
-    "name" : "Ann Placement-Manager",
-    "company" : "Staffing Inc.",
-    "phone" : {
-        "office" : "617-555-1991 ext. 315",
-        "cell" : "718-555-9151"
-    },
-    "email" : "ann.placementmanager@staffinginc.com"
-}
->
-```
-
-We got a call from 617-555-1122.  Who is it?
-
-```
-db.contacts.find({ $or: [
-    { phone: '617-555-1122'},
-    { 'phone.office': '617-555-1122' },
-    { 'phone.cell': '617-555-1122' },
-    { 'phone.home': '617-555-1122' }
-]});
-```
+* MongoDB doesn't care that some documents have fewer or more attributes.
 
 Let's look at the [SQL to MongoDB Mapping Chart](http://docs.mongodb.org/manual/reference/sql-comparison/).
 
-## Code along
+### Code along
 
-Working with your groups so that you can assist each other.
+Together we'll build a query to get the count of cities by country.
 
-* Make up five fictional people and add them to your contacts collection.
+### Practice
 
-* For now, keep things in the formats we have used with Joe Recruiter, Ann Placement-Manager, and Martine H. R. Director.
+Write a query to get the count of animals by kind born before 2010.
 
-* Make sure at least one of your people works for Staffing Inc. or TechCorp LLC.
+Then write a query to count people by height.
 
-* Search for your people and make sure you find them in the database.
+---
 
-## Update
+## Changing the data in documents in a collection
 
-### Demonstration
-
-Suppose that Joe Recruiter has founded his own firm.  We start with finding him in the database:
-
-```
-> db.contacts.find({name: "Joe Recruiter"}).pretty();
-{
-    "_id" : ObjectId("5579a06aaa2cdce4a1f15f21"),
-    "name" : "Joe Recruiter",
-    "company" : "Staffing Inc.",
-    "phone" : {
-        "office" : "617-555-1991 ext. 311",
-        "cell" : "508-555-9215"
-    },
-    "email" : "joe.recruiter@staffinginc.com"
-}
->
-```
-
-With the same searh clause, we can update that document:
-
-```
-db.contacts.update({
-    name: "Joe Recruiter"
-},{ $set: {
-    company: 'Recruiter Recruitment LLC',
-    'phone.office': '508-555-1111'
-}});
-
-db.contacts.update({
-    name: "Joe Recruiter"
-}, {
-    $set: { email: 'joe@recruiterrecruitment.com' }
-});
-```
-
-The $set key expects a dictionary of key-value pairs to update.
-
-## Code along
-
-* One of the contacts we added got a job at Staffing Inc.  Change his or her company, office phone number, and email.
-
-* One of our contacts has a new job title.  Update it.
-
-## Keeping a record of communications
-
-MongoDB makes it easy to add an array of items to a document.
-
-```
-db.contacts.update({
-    name: "Joe Recruiter"
-}, {
-    $push: { communications: {
-        from: 'Bob',
-        date: '20150914',
-        summary: "Discussed entry level dev opportunity" }
-    }
-});
-
-db.contacts.update({
-    name: "Joe Recruiter"
-}, {
-    $push: { communications: {
-        from: 'Bob',
-        date: '20150916',
-        summary: "Discussed entry level dev opportunity details" }
-    }
-});
-```
-
-## Code along
-
-Let's create a list of something attached to one of our contacts.  Maybe she collects classic cars?
-
-## Deleting a field
+- [Updating Data](https://docs.mongodb.org/getting-started/shell/update/) - overview of changing documents
+- [update](https://docs.mongodb.org/manual/reference/method/db.collection.update/) - detailed documentation of MongoDB's `update` collection method.
+- [Update Operators](https://docs.mongodb.org/manual/reference/operator/update/) - The different modifications we can make during an update.
 
 ### Demonstration
 
-We've secured a position and decide to remove our communications with Joe Recruiter:
+MongoDB makes it easy to add an array of items to a document.  We'll update some people and give them some pets.  Then we'll remove everyone's nick_name.
 
-```js
-db.contacts.update({
-    name: "Joe Recruiter"
-}, { $unset: { communications: 1 }});
-})
-```
+### Code along
 
-## Deleting a document
+Let's update some cities population.
 
-Joe Recruiter has retired and moved to Costa Rica so we remove him as a contact.
+### Practice
 
-```
-db.contacts.remove({ name: "Joe Recruiter"});
-```
+Update weight for pets then people.
 
-# Lab: Veterinary Cat-astrophe
+---
 
-We're starting a veterinary practice to take care of all the cats we know.
+## Deleting documents
 
-Start with `var db = new Mongo().getDB('crud');` at the top of your script, then add these cats:
+- [Removing Data](https://docs.mongodb.org/getting-started/shell/remove/) - Overview of removing documents from a collection.
+- [remove](https://docs.mongodb.org/manual/reference/method/db.collection.remove/) - detailed documentation of MongoDB's `remove` collection method.
 
-* Tiger, male, age 7, black short hair, adopted from NYSPCA
-* Reggie, male, age 7, half-Siamese striped tabby, adopted from NYSPCA
-* Ting, seal point Siamese, age 8, male, Siamese rescue
-* Boris, male, Russian blue, age 5, brother to Natasha, adopted from NYSPCA
-* Natasha, female, Russian blue, age 5, sister to Boris, adopted from NYSPCA
-* Bond, female, black and white tuxedo cat, age 4, found in Harvard Yard
-* Sacco, male, half-Siamese, age 3, adopted from MSPCA, brother to Vanzetti
-* Vanzetti, male, half-Siamese, age 3, adopted from MSPCA, brother to Sacco
-* M, female, grey tuxedo cat, age 3, adopted from MSPCA
-* Gilbert, male, 3/4-Siamese, age 3, adopted from MSPCA
-* Sullivan, male 3/4-Siamese, age 3, adopted from MSPCA
-* Domino, age 1, black and white tuxedo cat, rescued from Alabama
-* Ann, female, age 8, grey leopard tabby, found under a barn, sister to Julian
-* Julian, female, age 8, grey leopard tabby, found under a barn, sister to Ann
+If we want to clean up, `db.<collection>.drop();` drops the specified collection and `db.dropDatabase();` drops the current database.
 
-Some cats have favorite pastimes:
+### Demonstration
 
-* Tiger likes sitting in the sun.
-* Reggie likes complaining at the top of his voice.
-* Boris likes echo-locating in ventilation systems.
-* Sacco and Vanzetti like making mischief.
-* Bond likes ordering people around.
-* Domino likes harassing other cats.
+We'll remove a few people from the data-store.
 
-Now, we're a veterinary practice.   Make up at least fifteen vet visits and use the update + $push method to record them.  Do not distribute them evenly: some cats should have no vet visits on record, others will have several.
+### Code along
 
-If we want to clean up, `db.dropDatabase();` drops the current database.
+Let's remove the cities that don't have a region.
 
-## Review Objectives
+### Practice
 
-Let's discuss the first objective.  Based on what you've seen, what are some of the trade-offs between using a NoSQL database like MongoDB and using a relational database?
+Remove pets born before 1996 then people taller than 5'11".
+
+## Assessment
+

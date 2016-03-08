@@ -37,7 +37,7 @@ Run `sudo apt-get install mongodb`
 
 Relational databases are good at modeling data that fits into tables.  What do you use if your data isn't that structured?
 
-Perhaps a [noSQL](https://en.wikipedia.org/wiki/NoSQL) data-store. An important consideration is [ACID](http://en.wikipedia.org/wiki/ACID) versus [BASE](https://en.wikipedia.org/wiki/Eventual_consistency) and the [CAP theorem](https://en.wikipedia.org/wiki/CAP_theorem).
+Perhaps a [noSQL](https://en.wikipedia.org/wiki/NoSQL) data-store.
 
 MongoDB is a schema-less document-store that organizes documents in collections.  What does this mean?
 
@@ -56,7 +56,12 @@ MongoDB is a schema-less document-store that organizes documents in collections.
 
 We'll use `mongo-crud` as the database to hold our tables and [mongo](https://docs.mongodb.org/manual/reference/program/mongo/) to interact with it.  `mongo` is MongoDB's command line client which lets us execute commands interactively and from scripts.
 
-First we start the mongo shell:
+First let's fire up our server:
+```bash
+mongod
+```
+
+In a new tab start the mongo shell:
 
 ```bash
 $ mongo mongo-crud
@@ -120,6 +125,10 @@ mongoimport --db=mongo-crud --collection=people --type=csv --headerline --file=s
 
 If we want to clear the collection before the import we pass the `--drop` flag.
 
+Run this script by typing:
+
+ ``` sh path_to_file.sh ```
+
 Now that we've inserted data into it, the `mongo-crud` database and the `people` collection both exist.
 
 ```bash
@@ -170,7 +179,7 @@ Next add a person to the `people` collection using `insert` then bulk load `samp
 
 Let's see some what we can learn about the people in the database.
 
-**Note:**   In a MongoDB shell script we'll use `.forEach(printjson)` to display results.  When using the REPL the `.pretty()` method can be quite helpful.
+**Note:**   When using the REPL the `.pretty()` method can be quite helpful.
 
 What do we see?
 
@@ -178,17 +187,20 @@ What do we see?
 
 * MongoDB doesn't care that some documents have fewer or more attributes.
 
-Let's look at the [SQL to MongoDB Mapping Chart](http://docs.mongodb.org/manual/reference/sql-comparison/).
+
 
 ### Code along
 
-Together we'll build a query to get the count of cities by country.
+Together we'll build a query to get all the cities. How about with some over
+a certain population size.
+
+Woah, this looks like javascript. I wonder if we could use javascript?...
 
 ### Practice
 
-Write a query to get the count of animals by kind born before 2010.
+Write a query to get all the animals of a kind born before 2010.
 
-Then write a query to count people by height.
+Challenge: Using the docs select all animals that are fish, sort them by date.
 
 ---
 
@@ -200,7 +212,8 @@ Then write a query to count people by height.
 
 ### Demonstration
 
-MongoDB makes it easy to add an array of items to a document.  We'll update some people and give them some pets.  Then we'll remove everyone's nick_name.
+MongoDB makes it easy to add an array of items to a document.  We'll update
+some people and give them some pets.
 
 ### Code along
 
@@ -225,11 +238,12 @@ We'll remove a few people from the data-store.
 
 ### Code along
 
-Let's remove the cities that don't have a region.
+Let's remove all the cities with CA as a region
 
 ### Practice
 
 Remove pets born before 1996 then people taller than 5'11".
 
-## Assessment
+## Additional resources
 
+- [BSON Types]https://docs.mongodb.org/manual/reference/bson-types/

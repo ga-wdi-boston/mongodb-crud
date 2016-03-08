@@ -6,7 +6,6 @@
 
 Fork and clone this repository.
 
-Please use `git clone --recursive` to ensure you retrieve the `sample-data` submodule.
 
 ## Objectives
 
@@ -120,7 +119,7 @@ MongoDB's `mongoimport` command will let us load bulk data from a `JSON` or `CSV
 First we'll load data in bulk from `sample-data/csv/people.csv`.  We'll save the command in `scripts/import/people.sh`.
 
 ```bash
-mongoimport --db=mongo-crud --collection=people --type=csv --headerline --file=sample-data/csv/people.csv
+mongoimport --db=mongo-crud --collection=people --type=csv --headerline --file=sample/csv/people.csv
 ```
 
 If we want to clear the collection before the import we pass the `--drop` flag.

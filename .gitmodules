@@ -1,3 +1,0 @@
-[submodule "sample-data"]
-	path = sample-data
-	url = git@github.com:ga-wdi-boston/sample-data.git

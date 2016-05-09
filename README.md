@@ -26,7 +26,8 @@ Required readings:
 
 ## Installation
 
-We'll run `brew install mongodb` then execute the first two commands suggested.
+We'll run `brew install mongodb` then to make sure we're up to date run
+`brew update` then `brew upgrade mongo`.
 
 ### On Ubuntu:
 

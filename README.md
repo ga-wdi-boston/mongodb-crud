@@ -6,13 +6,13 @@
 
 Fork and clone this repository.
 
-
 ## Objectives
 
 By the end of the lesson, students should be able to:
 
-* Use the MongoDB shell to interact with MongoDB databases and collections
-* Create, Read, Update, and Delete documents in MongoDB collections using the MongoDB shell.
+*   Use the MongoDB shell to interact with MongoDB databases and collections
+*   Create, Read, Update, and Delete documents in MongoDB collections using the
+*   MongoDB shell.
 
 ## Prerequisites
 
@@ -20,48 +20,51 @@ Basic JavaScript.
 
 Required readings:
 
-- [Completely unbiased explanation of noSQL](https://www.mongodb.com/nosql-explained)
-- [Mongo DB Is Web Scale](https://www.youtube.com/watch?v=b2F-DItXtZs)
-- [Getting Started with MongoDB (MongoDB Shell Edition)](https://docs.mongodb.org/getting-started/shell/)
+*   [Completely unbiased explanation of noSQL](https://www.mongodb.com/nosql-explained)
+*   [Mongo DB Is Web Scale](https://www.youtube.com/watch?v=b2F-DItXtZs)
+*   [Getting Started with MongoDB (MongoDB Shell Edition)](https://docs.mongodb.org/getting-started/shell/)
 
 ## Installation
 
 We'll run `brew install mongodb` then to make sure we're up to date run
 `brew update` then `brew upgrade mongo`.
 
-### On Ubuntu:
+### On Ubuntu
 
 Run `sudo apt-get install mongodb`
 
 ## Introduction
 
-Relational databases are good at modeling data that fits into tables.  What do you use if your data isn't that structured?
+Relational databases are good at modeling data that fits into tables.  What do
+you use if your data isn't that structured?
 
 Perhaps a [noSQL](https://en.wikipedia.org/wiki/NoSQL) data-store.
 
-MongoDB is a schema-less document-store that organizes documents in collections.  What does this mean?
+MongoDB is a schema-less document-store that organizes documents in collections.
+What does this mean?
 
 ### Terminology
 
-|**Relational Database Term**|**MongoDB Term**|
-|:-------|:------|
-| database | database |
-| table | collection |
-| row | document |
-| column | field |
+| **Relational Database Term** | **MongoDB Term** |
+|:-----------------------------|:-----------------|
+| database                     | database         |
+| table                        | collection       |
+| row                          | document         |
+| column                       | field            |
 
 ## Create a database
 
 ### Code along
 
-We'll use `mongo-crud` as the database to hold our tables and [mongo](https://docs.mongodb.org/manual/reference/program/mongo/) to interact with it.  `mongo` is MongoDB's command line client which lets us execute commands interactively and from scripts.
+We'll use `mongo-crud` as the database to hold our tables and
+[mongo](https://docs.mongodb.org/manual/reference/program/mongo/) to interact
+with it.  `mongo` is MongoDB's command line client which lets us execute
+commands interactively and from scripts.
 
 First let's fire up our server:
 ```bash
-mongod
+brew services start mongodb
 ```
-
-In a new tab start the mongo shell:
 
 ```bash
 $ mongo mongo-crud
@@ -72,17 +75,19 @@ connecting to: mongo-crud
 
 The command to list databases is `show databases` (or `show dbs`):
 
-```
+```bash
 > show databases
 local  0.078GB
 >
 ```
 
-Unlike PostgreSQL, MongoDB lets us select a database that hasn't been created.  When we add a collection, the database will be created.
+Unlike PostgreSQL, MongoDB lets us select a database that hasn't been created.
+When we add a collection, the database will be created.
 
-If we didn't specify the database on the command line we can connect to a database with `use <database name>`:
+If we didn't specify the database on the command line we can connect to a
+database with `use <database name>`:
 
-```
+```bash
 MongoDB shell version: 3.0.7
 connecting to: test
 > use mongo-crud
@@ -92,21 +97,21 @@ local  0.078GB
 >
 ```
 
-## Create a collection
-
-### Code along
+## Code along: Create a Collection
 
 Our first collection will be called `people`. It has no entries.
 
-```
+```bash
 > show collections
 > db.people.count();
 0
 ```
 
-This is a common pattern in MongoDB: you can refer to things that don't yet exist, and it will cooperate.  MongoDB won't create them until you give it something to remember.
+This is a common pattern in MongoDB: you can refer to things that don't yet
+exist, and it will cooperate.  MongoDB won't create them until you give it
+something to remember.
 
-## Adding a document to a collection.
+## Adding a document to a collection
 
 - [Inserting data](https://docs.mongodb.org/getting-started/shell/insert/) - Overview of adding documents to a collection.
 - [db.<collection>.insert()](https://docs.mongodb.org/manual/reference/method/db.collection.insert/) - detailed documentation of MongoDB's `insert` collection method.
@@ -117,7 +122,8 @@ MongoDB's `mongoimport` command will let us load bulk data from a `JSON` or `CSV
 
 ### Demonstration
 
-First we'll load data in bulk from `sample-data/csv/people.csv`.  We'll save the command in `scripts/import/people.sh`.
+First we'll load data in bulk from `sample-data/csv/people.csv`.  We'll save the
+command in `scripts/import/people.sh`.
 
 ```bash
 mongoimport --db=mongo-crud --collection=people --type=csv --headerline --file=sample/csv/people.csv
@@ -129,7 +135,8 @@ Run this script by typing:
 
  ``` sh path_to_file.sh ```
 
-Now that we've inserted data into it, the `mongo-crud` database and the `people` collection both exist.
+Now that we've inserted data into it, the `mongo-crud` database and the `people`
+collection both exist.
 
 ```bash
 $ mongo mongo-crud
@@ -145,23 +152,33 @@ system.indexes
 2438
 ```
 
-Next we'll use the `insert` collection method to add a few more people.  We'll save our invocations in `insert/people.js`.  We'll execute that script using the `mongo` `load` method.  Let's give these people a middle_initial or a nick_name. Note that the attributes we choose for these people need not match those from the data we loaded in bulk.
+Next we'll use the `insert` collection method to add a few more people.  We'll
+save our invocations in `insert/people.js`.  We'll execute that script using the
+`mongo` `load` method.  Let's give these people a middle_initial or a nick_name.
+Note that the attributes we choose for these people need not match those from
+the data we loaded in bulk.
 
-```
+```bash
 > load('scripts/insert/people.js');
 ```
 
-MongoDB uses JSON natively (technically [BSON](https://docs.mongodb.org/manual/reference/glossary/#term-bson)), which makes it well suited for JavaScript applications.  Conveniently, MongoDB lets us specify the JSON as a JavaScript object.
+MongoDB uses JSON natively (technically
+[BSON](https://docs.mongodb.org/manual/reference/glossary/#term-bson)), which
+makes it well suited for JavaScript applications.  Conveniently, MongoDB lets us
+specify the JSON as a JavaScript object.
 
 #### Code along
 
-Together we'll add a few cities then we'll bulk load `sample-data/csv/cities.csv`.
+Together we'll add a few cities then we'll bulk load
+`sample-data/csv/cities.csv`.
 
 #### Practice
 
-Add a pet to the `pets` collection using `insert` then bulk load `sample-data/csv/pets.csv`.
+Add a pet to the `pets` collection using `insert` then bulk load
+`sample-data/csv/pets.csv`.
 
-Next add a person to the `people` collection using `insert` then bulk load `sample-data/csv/people.csv`.
+Next add a person to the `people` collection using `insert` then bulk load
+`sample-data/csv/people.csv`.
 
 ---
 
@@ -184,7 +201,6 @@ Let's see some what we can learn about the people in the database.
 What do we see?
 
 * MongoDB gave each of our documents a unique ID field, called _id.
-
 * MongoDB doesn't care that some documents have fewer or more attributes.
 
 
@@ -230,7 +246,8 @@ Update weight for pets then people.
 - [Removing Data](https://docs.mongodb.org/getting-started/shell/remove/) - Overview of removing documents from a collection.
 - [remove](https://docs.mongodb.org/manual/reference/method/db.collection.remove/) - detailed documentation of MongoDB's `remove` collection method.
 
-If we want to clean up, `db.<collection>.drop();` drops the specified collection and `db.dropDatabase();` drops the current database.
+If we want to clean up, `db.<collection>.drop();` drops the specified collection
+and `db.dropDatabase();` drops the current database.
 
 ### Demonstration
 

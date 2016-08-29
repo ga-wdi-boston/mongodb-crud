@@ -10,9 +10,9 @@ Fork and clone this repository.
 
 By the end of the lesson, students should be able to:
 
-*   Use the MongoDB shell to interact with MongoDB databases and collections
-*   Create, Read, Update, and Delete documents in MongoDB collections using the
-*   MongoDB shell.
+-   Use the MongoDB shell to interact with MongoDB databases and collections
+-   Create, Read, Update, and Delete documents in MongoDB collections using the
+    MongoDB shell.
 
 ## Prerequisites
 
@@ -20,9 +20,9 @@ Basic JavaScript.
 
 Required readings:
 
-*   [Completely unbiased explanation of noSQL](https://www.mongodb.com/nosql-explained)
-*   [Mongo DB Is Web Scale](https://www.youtube.com/watch?v=b2F-DItXtZs)
-*   [Getting Started with MongoDB (MongoDB Shell Edition)](https://docs.mongodb.org/getting-started/shell/)
+-   [SQL noSQL Disussion](https://github.com/ga-wdi-boston/sql-nosql-discussion)
+-   [Mongo DB Is Web Scale](https://www.youtube.com/watch?v=b2F-DItXtZs)
+-   [Getting Started with MongoDB (MongoDB Shell Edition)](https://docs.mongodb.org/getting-started/shell/)
 
 ## Installation
 
@@ -114,10 +114,10 @@ something to remember.
 
 ## Adding a document to a collection
 
-*   [Inserting data](https://docs.mongodb.org/getting-started/shell/insert/) - Overview of adding documents to a collection.
-*   [db.<collection>.insert()](https://docs.mongodb.org/manual/reference/method/db.collection.insert/) - detailed documentation of MongoDB's `insert` collection method.
-*   [Importing data](https://docs.mongodb.org/getting-started/shell/import-data/) - overview of MongoDB's `mongoimport` command line utility.
-*   [mongoimport](https://docs.mongodb.org/manual/reference/program/mongoimport/) - detailed documentation of MongoDB's `mongoimport` command line utility.
+-   [Inserting data](https://docs.mongodb.org/getting-started/shell/insert/) - Overview of adding documents to a collection.
+-   [db.<collection>.insert()](https://docs.mongodb.org/manual/reference/method/db.collection.insert/) - detailed documentation of MongoDB's `insert` collection method.
+-   [Importing data](https://docs.mongodb.org/getting-started/shell/import-data/) - overview of MongoDB's `mongoimport` command line utility.
+-   [mongoimport](https://docs.mongodb.org/manual/reference/program/mongoimport/) - detailed documentation of MongoDB's `mongoimport` command line utility.
 
 MongoDB's `mongoimport` command will let us load bulk data from a `JSON` or
 `CSV` file.
@@ -186,12 +186,12 @@ Next add a person to the `people` collection using `insert` then bulk load
 
 ## Retrieving documents from a collection
 
-*   [Querying](https://docs.mongodb.org/getting-started/shell/query/) - Overview of retrieving data from MongoDB.
-*   [Queries](https://docs.mongodb.org/manual/reference/mongo-shell/#queries) - More detailed overview on retrieving data.
-*   [find](https://docs.mongodb.org/manual/reference/method/db.collection.find/) - Detailed documentation on the `find` collection method.
-*   [findOne](https://docs.mongodb.org/manual/reference/method/db.collection.findOne/) - Detailed documentation on the `findOne` collection method.
-*   [Data aggregation](https://docs.mongodb.org/getting-started/shell/aggregation/) - Overview of summarizing documents.
-*   [aggregate](https://docs.mongodb.org/manual/reference/method/db.collection.aggregate/) - Detailed documentation on the `aggregate` collection method.
+-   [Querying](https://docs.mongodb.org/getting-started/shell/query/) - Overview of retrieving data from MongoDB.
+-   [Queries](https://docs.mongodb.org/manual/reference/mongo-shell/#queries) - More detailed overview on retrieving data.
+-   [find](https://docs.mongodb.org/manual/reference/method/db.collection.find/) - Detailed documentation on the `find` collection method.
+-   [findOne](https://docs.mongodb.org/manual/reference/method/db.collection.findOne/) - Detailed documentation on the `findOne` collection method.
+-   [Data aggregation](https://docs.mongodb.org/getting-started/shell/aggregation/) - Overview of summarizing documents.
+-   [aggregate](https://docs.mongodb.org/manual/reference/method/db.collection.aggregate/) - Detailed documentation on the `aggregate` collection method.
 
 ### Demonstration: Read
 
@@ -201,15 +201,13 @@ Let's see some what we can learn about the people in the database.
 
 What do we see?
 
-*   MongoDB gave each of our documents a unique ID field, called _id.
-*   MongoDB doesn't care that some documents have fewer or more attributes.
+-   MongoDB gave each of our documents a unique ID field, called _id.
+-   MongoDB doesn't care that some documents have fewer or more attributes.
 
 ### Code along: Read
 
 Together we'll build a query to get all the cities. How about with some over
 a certain population size.
-
-Woah, this looks like javascript. I wonder if we could use javascript?...
 
 ### Practice: Read
 
@@ -221,9 +219,9 @@ Challenge: Using the docs select all animals that are fish, sort them by date.
 
 ## Changing the data in documents in a collection
 
-*   [Updating Data](https://docs.mongodb.org/getting-started/shell/update/) - overview of changing documents
-*   [update](https://docs.mongodb.org/manual/reference/method/db.collection.update/) - detailed documentation of MongoDB's `update` collection method.
-*   [Update Operators](https://docs.mongodb.org/manual/reference/operator/update/) - The different modifications we can make during an update.
+-   [Updating Data](https://docs.mongodb.org/getting-started/shell/update/) - overview of changing documents
+-   [update](https://docs.mongodb.org/manual/reference/method/db.collection.update/) - detailed documentation of MongoDB's `update` collection method.
+-   [Update Operators](https://docs.mongodb.org/manual/reference/operator/update/) - The different modifications we can make during an update.
 
 ### Demonstration: Update
 
@@ -242,8 +240,8 @@ Update weight for pets then people.
 
 ## Deleting documents
 
-*   [Removing Data](https://docs.mongodb.org/getting-started/shell/remove/) - Overview of removing documents from a collection.
-*   [remove](https://docs.mongodb.org/manual/reference/method/db.collection.remove/) - detailed documentation of MongoDB's `remove` collection method.
+-   [Removing Data](https://docs.mongodb.org/getting-started/shell/remove/) - Overview of removing documents from a collection.
+-   [remove](https://docs.mongodb.org/manual/reference/method/db.collection.remove/) - detailed documentation of MongoDB's `remove` collection method.
 
 If we want to clean up, `db.<collection>.drop();` drops the specified collection
 and `db.dropDatabase();` drops the current database.
@@ -262,4 +260,4 @@ Remove pets born before 1996 then people taller than 5'11".
 
 ## Additional resources
 
-*   [BSON Types](https://docs.mongodb.org/manual/reference/bson-types/)
+-   [BSON Types](https://docs.mongodb.org/manual/reference/bson-types/)

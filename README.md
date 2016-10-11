@@ -69,7 +69,7 @@ brew services start mongodb
 
 ```bash
 $ mongo mongo-crud
-MongoDB shell version: 3.0.7
+MongoDB shell version: 3.2.10
 connecting to: mongo-crud
 >
 ```
@@ -78,7 +78,7 @@ The command to list databases is `show databases` (or `show dbs`):
 
 ```bash
 > show databases
-local  0.078GB
+local  0.000GB # or local  0.078GB
 >
 ```
 
@@ -124,14 +124,23 @@ MongoDB's `mongoimport` command will let us load bulk data from a `JSON` or
 
 ### Demonstration
 
-First we'll load data in bulk from `sample-data/csv/people.csv`.  We'll save the
+Watch as I load data in bulk from `data/books.csv`.  We'll save the
+command in `scripts/import/books.sh`.
+
+```bash
+mongoimport --db=mongo-crud --collection=books --type=csv --headerline --file=data/books.csv
+```
+
+#### Code along: Create People through Bulk Load
+
+First we'll load data in bulk from `data/people.csv`.  We'll save the
 command in `scripts/import/people.sh`.
 
 ```bash
-mongoimport --db=mongo-crud --collection=people --type=csv --headerline --file=sample/csv/people.csv
+mongoimport --db=mongo-crud --collection=people --type=csv --headerline --file=data/people.csv
 ```
 
-If we want to clear the collection before the import we pass the `--drop` flag.
+If we want to clear the collection before the import, we pass the `--drop` flag.
 
 Run this script by typing:
 
@@ -169,18 +178,15 @@ MongoDB uses JSON natively (technically
 makes it well suited for JavaScript applications.  Conveniently, MongoDB lets us
 specify the JSON as a JavaScript object.
 
-#### Code along: Create
+#### Code along: Create Doctors
 
-Together we'll add a few cities then we'll bulk load
-`sample-data/csv/cities.csv`.
+Together we'll add a few doctors then we'll bulk load
+`data/doctors.csv`.
 
-#### Practice: Create
+#### Practice: Create Ingredients
 
-Add a pet to the `pets` collection using `insert` then bulk load
-`sample-data/csv/pets.csv`.
-
-Next add a person to the `people` collection using `insert` then bulk load
-`sample-data/csv/people.csv`.
+Add an ingedient to the `ingredients` collection using `insert` then bulk load
+`data/ingredients.csv`.
 
 ---
 
@@ -195,7 +201,7 @@ Next add a person to the `people` collection using `insert` then bulk load
 
 ### Demonstration: Read
 
-Let's see some what we can learn about the people in the database.
+Let's see some what we can learn about the books in the database.
 
 **Note:**   When using the REPL the `.pretty()` method can be quite helpful.
 
@@ -204,16 +210,14 @@ What do we see?
 -   MongoDB gave each of our documents a unique ID field, called _id.
 -   MongoDB doesn't care that some documents have fewer or more attributes.
 
-### Code along: Read
 
-Together we'll build a query to get all the cities. How about with some over
-a certain population size.
+### Code along: Read People and Doctors
 
-### Practice: Read
+Together we'll build a query to our people collections table. Let's see if we can find all people born after a date. Now, how about doctors with a specific specialty?
 
-Write a query to get all the animals of a kind born before 2010.
+### Practice: Read Ingredients
 
-Challenge: Using the docs select all animals that are fish, sort them by date.
+Write a query to get all the ingredients of unit of `tbs`.
 
 ---
 
@@ -226,15 +230,16 @@ Challenge: Using the docs select all animals that are fish, sort them by date.
 ### Demonstration: Update
 
 MongoDB makes it easy to add an array of items to a document.  We'll update
-some people and give them some pets.
+some books and give them a publisher.
 
 ### Code along: Update
 
-Let's update some cities population.
+Now, let's update some people with a hometown. Let's update some doctors
+specialty.
 
 ### Practice: Update
 
-Update weight for pets then people.
+Update a couple of ingredients units then .
 
 ---
 
@@ -248,16 +253,23 @@ and `db.dropDatabase();` drops the current database.
 
 ### Demonstration: Delete
 
-We'll remove a few people from the data-store.
+We'll remove a few books from the data-store.
 
-### Code along: Delete
+### Code along: Delete People and Doctors
 
-Let's remove all the cities with CA as a region
+Let's remove all the people with a specific `bornOn` date and doctors with
+`Internal Medicine` as their specialty
 
 ### Practice: Delete
 
-Remove pets born before 1996 then people taller than 5'11".
+Remove Ingredients that have `ml` as their unit of measure.
 
 ## Additional resources
 
 -   [BSON Types](https://docs.mongodb.org/manual/reference/bson-types/)
+
+[License](LICENSE)
+
+1.  All content is licensed under a CC­BY­NC­SA 4.0 license.
+1.  All software code is licensed under GNU GPLv3. For commercial use or alternative
+licensing, please contact legal@ga.co.

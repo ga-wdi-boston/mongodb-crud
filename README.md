@@ -268,7 +268,7 @@ Remove Ingredients that have `ml` as their unit of measure.
 
 -   [BSON Types](https://docs.mongodb.org/manual/reference/bson-types/)
 
-[License](LICENSE)
+## [License](LICENSE)
 
 1.  All content is licensed under a CC­BY­NC­SA 4.0 license.
 1.  All software code is licensed under GNU GPLv3. For commercial use or alternative

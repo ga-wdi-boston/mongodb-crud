@@ -1,1 +1,8 @@
-// retrieve person documents
+// find documents
+db.people.find(
+  {
+    height: {
+      $gt: 65,
+    }
+  }
+)

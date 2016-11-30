@@ -180,12 +180,12 @@ MongoDB uses JSON natively (technically
 makes it well suited for JavaScript applications.  Conveniently, MongoDB lets us
 specify the JSON as a JavaScript object.
 
-### Code along: Create Doctors
+### Code along: Insert Doctors
 
 Together we'll add a few doctors then we'll bulk load
 `data/doctors.csv`.
 
-### Lab: Create Ingredients
+### Lab: Insert Ingredients
 
 Add an ingedient to the `ingredients` collection using `insert` then bulk load
 `data/ingredients.csv`.

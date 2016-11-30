@@ -98,7 +98,9 @@ local  0.078GB
 >
 ```
 
-## Code along: Create a Collection
+## Create a Collection
+
+### Code Along
 
 Our first collection will be called `people`. It has no entries.
 
@@ -122,7 +124,7 @@ something to remember.
 MongoDB's `mongoimport` command will let us load bulk data from a `JSON` or
 `CSV` file.
 
-### Demonstration
+### Demo: Bulk Load Books
 
 Watch as I load data in bulk from `data/books.csv`.  We'll save the
 command in `scripts/import/books.sh`.
@@ -131,7 +133,7 @@ command in `scripts/import/books.sh`.
 mongoimport --db=mongo-crud --collection=books --type=csv --headerline --file=data/books.csv
 ```
 
-#### Code along: Create People through Bulk Load
+#### Code along: Bulk Load People
 
 First we'll load data in bulk from `data/people.csv`.  We'll save the
 command in `scripts/import/people.sh`.
@@ -178,12 +180,12 @@ MongoDB uses JSON natively (technically
 makes it well suited for JavaScript applications.  Conveniently, MongoDB lets us
 specify the JSON as a JavaScript object.
 
-#### Code along: Create Doctors
+### Code along: Create Doctors
 
 Together we'll add a few doctors then we'll bulk load
 `data/doctors.csv`.
 
-#### Practice: Create Ingredients
+### Lab: Create Ingredients
 
 Add an ingedient to the `ingredients` collection using `insert` then bulk load
 `data/ingredients.csv`.
@@ -199,7 +201,7 @@ Add an ingedient to the `ingredients` collection using `insert` then bulk load
 -   [Data aggregation](https://docs.mongodb.org/getting-started/shell/aggregation/) - Overview of summarizing documents.
 -   [aggregate](https://docs.mongodb.org/manual/reference/method/db.collection.aggregate/) - Detailed documentation on the `aggregate` collection method.
 
-### Demonstration: Read
+### Demo: Read Books
 
 Let's see some what we can learn about the books in the database.
 
@@ -215,7 +217,7 @@ What do we see?
 
 Together we'll build a query to our people collections table. Let's see if we can find all people born after a date. Now, how about doctors with a specific specialty?
 
-### Practice: Read Ingredients
+### Lab: Read Ingredients
 
 Write a query to get all the ingredients of unit of `tbs`.
 
@@ -227,7 +229,7 @@ Write a query to get all the ingredients of unit of `tbs`.
 -   [update](https://docs.mongodb.org/manual/reference/method/db.collection.update/) - detailed documentation of MongoDB's `update` collection method.
 -   [Update Operators](https://docs.mongodb.org/manual/reference/operator/update/) - The different modifications we can make during an update.
 
-### Demonstration: Update
+### Demo: Update
 
 MongoDB makes it easy to add an array of items to a document.  We'll update
 some books and give them a publisher.
@@ -237,7 +239,7 @@ some books and give them a publisher.
 Now, let's update some people with a hometown. Let's update some doctors
 specialty.
 
-### Practice: Update
+### Lab: Update
 
 Update a couple of ingredients units then .
 
@@ -260,7 +262,7 @@ We'll remove a few books from the data-store.
 Let's remove all the people with a specific `bornOn` date and doctors with
 `Internal Medicine` as their specialty
 
-### Practice: Delete
+### Lab: Delete
 
 Remove Ingredients that have `ml` as their unit of measure.
 

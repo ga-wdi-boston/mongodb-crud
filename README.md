@@ -229,17 +229,17 @@ Write a query to get all the ingredients of unit of `tbs`.
 -   [update](https://docs.mongodb.org/manual/reference/method/db.collection.update/) - detailed documentation of MongoDB's `update` collection method.
 -   [Update Operators](https://docs.mongodb.org/manual/reference/operator/update/) - The different modifications we can make during an update.
 
-### Demo: Update
+### Demo: Update Books
 
 MongoDB makes it easy to add an array of items to a document.  We'll update
 some books and give them a publisher.
 
-### Code along: Update
+### Code along: Update People and Doctors
 
 Now, let's update some people with a hometown. Let's update some doctors
 specialty.
 
-### Lab: Update
+### Lab: Update Ingredients
 
 Update a couple of ingredients units then .
 
@@ -253,7 +253,7 @@ Update a couple of ingredients units then .
 If we want to clean up, `db.<collection>.drop();` drops the specified collection
 and `db.dropDatabase();` drops the current database.
 
-### Demonstration: Delete
+### Demo: Delete Books
 
 We'll remove a few books from the data-store.
 
@@ -262,7 +262,7 @@ We'll remove a few books from the data-store.
 Let's remove all the people with a specific `bornOn` date and doctors with
 `Internal Medicine` as their specialty
 
-### Lab: Delete
+### Lab: Delete Ingredients
 
 Remove Ingredients that have `ml` as their unit of measure.
 

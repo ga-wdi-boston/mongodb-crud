@@ -205,12 +205,44 @@ Add an ingedient to the `ingredients` collection using `insert` then bulk load
 
 Let's see some what we can learn about the books in the database.
 
+```bash
+> db.books.find({author: Hemingway}).pretty()
+{
+	"_id" : ObjectId("583ee3f3e6ae0faa5547068e"),
+	"title" : "A Farewell to Arms",
+	"author" : "Ernest Hemingway",
+	"published_on" : "1986-02-15"
+}
+{
+	"_id" : ObjectId("583ee3f3e6ae0faa5547071a"),
+	"title" : "The Sun Also Rises",
+	"author" : "Ernest Hemingway",
+	"published_on" : "2002-10-20"
+}
+> db.books.find({published_on: /20/}).count()
+36
+> db.books.find({published_on: /20/}).sort({title: -1}).limit(2).pretty()
+{
+	"_id" : ObjectId("583ee3f3e6ae0faa5547072f"),
+	"title" : "Wide Sargasso Sea",
+	"author" : "Jean Rhys",
+	"published_on" : "2011-01-14"
+}
+{
+	"_id" : ObjectId("583ee3f3e6ae0faa55470725"),
+	"title" : "Trader",
+	"author" : "Charles de Lint",
+	"published_on" : "2003-06-23"
+}
+```
+
 **Note:**   When using the REPL the `.pretty()` method can be quite helpful.
 
 What do we see?
 
 -   MongoDB gave each of our documents a unique ID field, called _id.
 -   MongoDB doesn't care that some documents have fewer or more attributes.
+
 
 
 ### Code along: Read People and Doctors

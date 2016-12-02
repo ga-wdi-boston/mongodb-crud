@@ -266,7 +266,15 @@ Write a query to get all the ingredients of unit of `tbs`.
 ### Demo: Update Books
 
 MongoDB makes it easy to add an array of items to a document.  We'll update
-some books and give them a publisher.
+some books and give them a correct `published_on` value.
+
+```bash
+> db.books.update({title: 1984}, {$set: {"published_on": "1949-06-08"}})
+WriteResult({ "nMatched" : 1, "nUpserted" : 0, "nModified" : 1 })
+> db.books.update({title: "Slaughterhouse-Five"}, {$set: {published_on: "1969-03-31", book_cover: "brown", pages: 247} })
+```
+
+What happens if we run an `update` command without the `$set` option?
 
 ### Code along: Update People and Doctors
 

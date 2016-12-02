@@ -247,7 +247,9 @@ What do we see?
 
 ### Code along: Read People and Doctors
 
-Together we'll build a query to our people collections table. Let's see if we can find all people born after a date. Now, how about doctors with a specific specialty?
+Together we'll build a query to our people collections table. Let's see if we
+can find all people born after a date. How about the number of people under
+5 feet tall, and doctors who perform surgery?
 
 ### Lab: Read Ingredients
 

@@ -297,7 +297,15 @@ and `db.dropDatabase();` drops the current database.
 
 ### Demo: Delete Books
 
-We'll remove a few books from the data-store.
+We'll remove a few books from the data-store. There are methods for removing
+one and multiple entries.
+
+```bash
+> db.books.deleteOne({author:"Mongo Expert"})
+WriteResult({ "nRemoved" : 1 })
+> db.books.deleteOne({author:"Mongo Expert"})
+WriteResult({ "nRemoved" : 3 })
+```
 
 ### Code along: Delete People and Doctors
 

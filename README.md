@@ -89,7 +89,7 @@ If we didn't specify the database on the command line we can connect to a
 database with `use <database name>`:
 
 ```bash
-MongoDB shell version: 3.0.7
+MongoDB shell version: 3.2.10
 connecting to: test
 > use mongo-crud
 switched to db mongo-crud
@@ -153,7 +153,7 @@ collection both exist.
 
 ```bash
 $ mongo mongo-crud
-MongoDB shell version: 3.0.7
+MongoDB shell version: 3.2.10
 connecting to: mongo-crud
 > show dbs
 local       0.078GB

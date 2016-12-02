@@ -283,7 +283,7 @@ specialty.
 
 ### Lab: Update Ingredients
 
-Update a couple of ingredients units then .
+Update a couple of ingredient units.
 
 ---
 
@@ -309,8 +309,8 @@ WriteResult({ "nRemoved" : 3 })
 
 ### Code along: Delete People and Doctors
 
-Let's remove all the people with a specific `bornOn` date and doctors with
-`Internal Medicine` as their specialty
+Let's remove all the people with a `bornOn` date from the 1940s, and doctors with
+`Internal medicine` as their specialty
 
 ### Lab: Delete Ingredients
 

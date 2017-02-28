@@ -206,7 +206,7 @@ Add an ingedient to the `ingredients` collection using `insert` then bulk load
 Let's see some what we can learn about the books in the database.
 
 ```bash
-> db.books.find({author: Hemingway}).pretty()
+> db.books.find({author: "Ernest Hemingway"}).pretty()
 {
 	"_id" : ObjectId("583ee3f3e6ae0faa5547068e"),
 	"title" : "A Farewell to Arms",

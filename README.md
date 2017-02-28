@@ -1,4 +1,4 @@
-![General Assembly Logo](http://i.imgur.com/ke8USTq.png)
+[![General Assembly Logo](https://camo.githubusercontent.com/1a91b05b8f4d44b5bbfb83abac2b0996d8e26c92/687474703a2f2f692e696d6775722e636f6d2f6b6538555354712e706e67)](https://generalassemb.ly/education/web-development-immersive)
 
 # An Introduction to MongoDB
 
@@ -117,7 +117,7 @@ something to remember.
 ## Adding a document to a collection
 
 -   [Inserting data](https://docs.mongodb.org/getting-started/shell/insert/) - Overview of adding documents to a collection.
--   [db.<collection>.insert()](https://docs.mongodb.org/manual/reference/method/db.collection.insert/) - detailed documentation of MongoDB's `insert` collection method.
+-   [db.collection.insert()](https://docs.mongodb.org/manual/reference/method/db.collection.insert/) - detailed documentation of MongoDB's `insert` collection method.
 -   [Importing data](https://docs.mongodb.org/getting-started/shell/import-data/) - overview of MongoDB's `mongoimport` command line utility.
 -   [mongoimport](https://docs.mongodb.org/manual/reference/program/mongoimport/) - detailed documentation of MongoDB's `mongoimport` command line utility.
 
@@ -206,7 +206,7 @@ Add an ingedient to the `ingredients` collection using `insert` then bulk load
 Let's see some what we can learn about the books in the database.
 
 ```bash
-> db.books.find({author: Hemingway}).pretty()
+> db.books.find({author: "Ernest Hemingway"}).pretty()
 {
 	"_id" : ObjectId("583ee3f3e6ae0faa5547068e"),
 	"title" : "A Farewell to Arms",
@@ -283,7 +283,7 @@ specialty.
 
 ### Lab: Update Ingredients
 
-Update a couple of ingredients units then .
+Update a couple of ingredients units.
 
 ---
 
@@ -323,5 +323,5 @@ Remove Ingredients that have `ml` as their unit of measure.
 ## [License](LICENSE)
 
 1.  All content is licensed under a CC­BY­NC­SA 4.0 license.
-1.  All software code is licensed under GNU GPLv3. For commercial use or alternative
-licensing, please contact legal@ga.co.
+1.  All software code is licensed under GNU GPLv3. For commercial use or
+    alternative licensing, please contact legal@ga.co.

@@ -283,7 +283,7 @@ specialty.
 
 ### Lab: Update Ingredients
 
-Update a couple of ingredients units then .
+Update a couple of ingredients units.
 
 ---
 

@@ -253,7 +253,7 @@ can find all people born after a date. How about the number of people under
 
 ### Lab: Read Ingredients
 
-Write a query to get all the ingredients of unit of `tbs`.
+Write a query to get all the ingredients of unit of `tbsp`.
 
 ---
 

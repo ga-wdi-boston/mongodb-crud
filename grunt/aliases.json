@@ -1,6 +1,8 @@
 {
-  "default": ["nag"],
-  "nag": ["jshint", "jsonlint:all", "jscs:status"],
-  "reformat": ["jscs:write"],
-  "test": ["mochaTest:test"]
+  "default": ["nag", "test"],
+  "test-watcher": ["mochacli:watch"],
+  "make-standard": ["eslint:fix"],
+  "nag": ["eslint:all", "jsonlint:all"],
+  "server": ["nodemon:server"],
+  "test": ["mochacli:test"]
 }

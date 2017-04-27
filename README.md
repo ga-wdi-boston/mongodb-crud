@@ -253,7 +253,7 @@ can find all people born after a date. How about the number of people under
 
 ### Lab: Read Ingredients
 
-Write a query to get all the ingredients of unit of `tbs`.
+Write a query to get all the ingredients of unit of `tbsp`.
 
 ---
 
@@ -269,7 +269,7 @@ MongoDB makes it easy to add an array of items to a document.  We'll update
 some books and give them a correct `published_on` value.
 
 ```bash
-> db.books.update({title: 1984}, {$set: {"published_on": "1949-06-08"}})
+> db.books.update({title: 1984}, {$set: {published_on: "1949-06-08"}})
 WriteResult({ "nMatched" : 1, "nUpserted" : 0, "nModified" : 1 })
 > db.books.update({title: "Slaughterhouse-Five"}, {$set: {published_on: "1969-03-31", book_cover: "brown", pages: 247} })
 ```
